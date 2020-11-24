@@ -26,13 +26,13 @@ Game::Game(MainWindow& wnd)
     wnd(wnd),
     gfx(wnd),
     rng(rd()),
-    xPosDistribution(15.0, 784.0),
-    yPosDistribution(15.0, 584.0),
+    xPosDistribution(15, 784),
+    yPosDistribution(15, 584),
     crosshair(399, 299, 10, 255, 10)
 {
     for (int index = 0; index < amount; ++index)
     {
-        targets[index].Init(xPosDistribution(rng), yPosDistribution(rng), targetXVectorTable[index], targetYVectorTable[index], targetSpeedTable[index], targetSizeTable[index], 255, 255, 255);
+        targets[index].Init(float(xPosDistribution(rng)), float(yPosDistribution(rng)), targetXVectorTable[index], targetYVectorTable[index], targetSpeedTable[index], targetSizeTable[index], 255, 255, 255);
     }
 }
 
@@ -78,4 +78,25 @@ void Game::ComposeFrame()
     }
 
     crosshair.Draw(gfx);
+}
+
+void Game::DrawCircle(int x_pos, int y_pos, int dimension)
+{
+    const int radius = dimension / 2;
+    const int radius_sqr = radius * radius;
+
+    for (int row = 0; row < dimension; ++row)
+    {
+        for (int col = 0; col < dimension; ++col)
+        {
+            int x = col - radius;
+            int y = radius - row;
+            int sumsqr = x * x + y * y;
+
+            if (sumsqr <= radius_sqr)
+            {
+                gfx.PutPixel(x_pos + row, y_pos + col, 255, 255, 255);
+            }
+        }
+    }
 }

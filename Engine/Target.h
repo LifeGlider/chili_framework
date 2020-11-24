@@ -10,6 +10,7 @@ public:
 	void Init(float xPosInput, float yPosInput, float xVectorInput, float yVectorInput, float speedInput, int sizeInput, int colorRedInput, int colorGreenInput, int colorBlueInput);
 	void UpdatePosition();
 	void UpdateHitbox();
+	bool IsOnScreen(const Graphics& gfx, const float x_pos, const float y_pos) const;
 	void Draw(Graphics& gfx) const;
 	bool isAliveCheck() const;
 	bool isColliding(const int objectHitbox[4]);
@@ -26,7 +27,7 @@ private:
 	int colorRed;
 	int colorGreen;
 	int colorBlue;
-	int hitBox[4];
+	float hitBox[4];
 	bool isAlive = true;
 	bool isInitialized = false;
 };
