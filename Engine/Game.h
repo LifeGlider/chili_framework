@@ -42,6 +42,8 @@ private:
 	/*  User Functions              */
 	/********************************/
 
+    void DrawCircle(int x_pos, int y_pos, int radius);
+
 private:
 	MainWindow& wnd;
 	Graphics gfx;
@@ -53,14 +55,14 @@ private:
     static const int amount = 9;
     float targetXVectorTable[amount] = { 1.0f, -1.0f, -1.0f, 1.0f, -1.0f, -1.0f, 1.0f, -1.0f, -1.0f };
     float targetYVectorTable[amount] = { 1.0f, 1.0f, -1.0f, 1.0f, 1.0f, -1.0f, 1.0f, 1.0f, -1.0f };
-    float targetSpeedTable[amount] = { 0.5f, 1.0f, 2.0f, 0.5f, 1.0f, 2.0f, 0.5f, 1.0f, 2.0f };
+    float targetSpeedTable[amount] = { 1.5f, 1.0f, 2.0f, 1.5f, 1.0f, 2.0f, 1.5f, 1.0f, 2.0f };
     int targetSizeTable[amount] = { 13, 15, 17, 13, 15, 17, 13, 15, 17 };
     bool collisionDetected = false;
 
     std::random_device rd;
     std::mt19937 rng;
-    std::uniform_real_distribution<float> xPosDistribution;
-    std::uniform_real_distribution<float> yPosDistribution;
+    std::uniform_int_distribution<int> xPosDistribution;
+    std::uniform_int_distribution<int> yPosDistribution;
 
     Crosshair crosshair;
     Target targets[amount];
