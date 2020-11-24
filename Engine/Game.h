@@ -42,12 +42,6 @@ private:
 	/*  User Functions              */
 	/********************************/
 
-    int Game::SetPixelPosition(int pixel_pos, int pixel_speed, int screen_border);
-
-    void Game::DrawTarget(int size, int x_pos, int y_pos);
-
-    void Game::DrawCrosshair(int mesh[32][2], int pixelCount, int x_pos, int y_pos, int ScreenWidth, int ScreenHeight, int speed, int red_color, int green_color, int blue_color);
-
 private:
 	MainWindow& wnd;
 	Graphics gfx;
@@ -57,16 +51,16 @@ private:
 	/********************************/
 
     static const int amount = 9;
-    int targetXVectorTable[amount] = { 1, -1, -1, 1, -1, -1, 1, -1, -1 };
-    int targetYVectorTable[amount] = { 1, 1, -1, 1, 1, -1, 1, 1, -1 };
+    float targetXVectorTable[amount] = { 1.0f, -1.0f, -1.0f, 1.0f, -1.0f, -1.0f, 1.0f, -1.0f, -1.0f };
+    float targetYVectorTable[amount] = { 1.0f, 1.0f, -1.0f, 1.0f, 1.0f, -1.0f, 1.0f, 1.0f, -1.0f };
+    float targetSpeedTable[amount] = { 0.5f, 1.0f, 2.0f, 0.5f, 1.0f, 2.0f, 0.5f, 1.0f, 2.0f };
     int targetSizeTable[amount] = { 13, 15, 17, 13, 15, 17, 13, 15, 17 };
-    int targetSpeedTable[amount] = { 2, 2, 2, 2, 2, 2, 2, 2, 2 };
     bool collisionDetected = false;
 
     std::random_device rd;
     std::mt19937 rng;
-    std::uniform_int_distribution<int> xPosDistribution;
-    std::uniform_int_distribution<int> yPosDistribution;
+    std::uniform_real_distribution<float> xPosDistribution;
+    std::uniform_real_distribution<float> yPosDistribution;
 
     Crosshair crosshair;
     Target targets[amount];

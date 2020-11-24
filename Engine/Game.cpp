@@ -26,13 +26,13 @@ Game::Game(MainWindow& wnd)
     wnd(wnd),
     gfx(wnd),
     rng(rd()),
-    xPosDistribution(15, 784),
-    yPosDistribution(15, 584),
+    xPosDistribution(15.0, 784.0),
+    yPosDistribution(15.0, 584.0),
     crosshair(399, 299, 10, 255, 10)
 {
     for (int index = 0; index < amount; ++index)
     {
-        targets[index].Init(xPosDistribution(rng), yPosDistribution(rng), targetXVectorTable[index], targetYVectorTable[index], targetSizeTable[index], targetSpeedTable[index], 255, 255, 255);
+        targets[index].Init(xPosDistribution(rng), yPosDistribution(rng), targetXVectorTable[index], targetYVectorTable[index], targetSpeedTable[index], targetSizeTable[index], 255, 255, 255);
     }
 }
 

@@ -7,7 +7,7 @@
 class Target
 {
 public:
-	void Init(int xPosInput, int yPosInput, int xVectorInput, int yVectorInput, int sizeInput, int speedInput, int colorRedInput, int colorGreenInput, int colorBlueInput);
+	void Init(float xPosInput, float yPosInput, float xVectorInput, float yVectorInput, float speedInput, int sizeInput, int colorRedInput, int colorGreenInput, int colorBlueInput);
 	void UpdatePosition();
 	void UpdateHitbox();
 	void Draw(Graphics& gfx) const;
@@ -17,12 +17,12 @@ public:
 	void UpdateTargetStatus(const int objectHitbox[4], bool trigger);
 	
 private:
-	int xPos;
-	int yPos;
-	int xVector;
-	int yVector;
+	float xPos;
+	float yPos;
+	float xVector;
+	float yVector;
+	float speed;
 	int size;
-	int speed;
 	int colorRed;
 	int colorGreen;
 	int colorBlue;
