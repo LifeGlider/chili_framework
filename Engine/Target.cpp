@@ -22,23 +22,23 @@ void Target::Init(float xPosInput, float yPosInput, float xVectorInput, float yV
 }
 
 // Calculate vector direction and new position
-void Target::UpdatePosition()
+void Target::UpdatePosition(float deltaTime)
 {
     // Allow only on initialized object
     assert(isInitialized == true);
 
-    if (hitBox[0] - speed < 2.0f || hitBox[1] + speed > float(Graphics::ScreenWidth) - 3.0f)
+    if (hitBox[0] - speed < 0.0f || hitBox[1] + speed > float(Graphics::ScreenWidth) - 1.0f)
     {
         xVector *= -1.0;
     }
 
-    if (hitBox[2] - speed < 2.0f || hitBox[3] + speed > float(Graphics::ScreenHeight) - 3.0f)
+    if (hitBox[2] - speed < 0.0f || hitBox[3] + speed > float(Graphics::ScreenHeight) - 1.0f)
     {
         yVector *= -1.0;
     }
 
-    xPos += speed * xVector;
-    yPos += speed * yVector;
+    xPos += (speed * xVector) * (deltaTime * 60.0f);
+    yPos += (speed * yVector) * (deltaTime * 60.0f);
 }
 
 // Calculate new positon for hitbox sides
@@ -121,12 +121,12 @@ void Target::KillTarget()
 }
 
 // Execute main subroutines for target global position and execute 'killing' function
-void Target::UpdateTargetStatus(const int objectHitbox[4], bool trigger)
+void Target::UpdateTargetStatus(const int objectHitbox[4], bool trigger, float deltaTime)
 {
     // Allow only on initialized object
     assert(isInitialized == true);
 
-    UpdatePosition();
+    UpdatePosition(deltaTime);
     UpdateHitbox();
     if (Target::isColliding(objectHitbox) && isAlive && trigger)
     {

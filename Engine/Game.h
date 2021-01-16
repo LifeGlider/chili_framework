@@ -25,7 +25,9 @@
 #include "Graphics.h"
 #include "Target.h"
 #include "Crosshair.h"
+#include "FrameTimer.h"
 #include <random>
+#include <chrono>
 
 class Game
 {
@@ -59,6 +61,7 @@ private:
     int targetSizeTable[amount] = { 13, 15, 17, 13, 15, 17, 13, 15, 17 };
     bool collisionDetected = false;
 
+    FrameTimer ft;
     std::random_device rd;
     std::mt19937 rng;
     std::uniform_int_distribution<int> xPosDistribution;

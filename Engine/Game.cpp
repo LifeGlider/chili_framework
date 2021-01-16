@@ -46,6 +46,8 @@ void Game::Go()
 
 void Game::UpdateModel()
 {
+    const float dt = ft.Mark();
+
     // Update corsshair actual position and update hitbox position
     crosshair.UpdatePosition(wnd.mouse.GetPosX(), wnd.mouse.GetPosY());
     crosshair.UpdateHitbox();
@@ -53,7 +55,7 @@ void Game::UpdateModel()
     // Execute movement subroutines for all targets and detect collisions with crosshair
     for (int index = 0; index < amount; ++index)
     {
-        targets[index].UpdateTargetStatus(crosshair.hitBox, wnd.mouse.LeftIsPressed());
+        targets[index].UpdateTargetStatus(crosshair.hitBox, wnd.mouse.LeftIsPressed(), dt);
         
         collisionDetected = collisionDetected || targets[index].isColliding(crosshair.hitBox);
     }
@@ -72,31 +74,20 @@ void Game::UpdateModel()
 
 void Game::ComposeFrame()
 {
+    using std::chrono::steady_clock;
+
+    auto start = steady_clock::now();
+
     for (int index = 0; index < amount; ++index)
     {
         targets[index].Draw(gfx);
     }
 
     crosshair.Draw(gfx);
-}
 
-void Game::DrawCircle(int x_pos, int y_pos, int dimension)
-{
-    const int radius = dimension / 2;
-    const int radius_sqr = radius * radius;
+    auto end = steady_clock::now();
 
-    for (int row = 0; row < dimension; ++row)
-    {
-        for (int col = 0; col < dimension; ++col)
-        {
-            int x = col - radius;
-            int y = radius - row;
-            int sumsqr = x * x + y * y;
+    std::chrono::duration<float> runtime = end - start;
 
-            if (sumsqr <= radius_sqr)
-            {
-                gfx.PutPixel(x_pos + row, y_pos + col, 255, 255, 255);
-            }
-        }
-    }
+    float durationSeconds = runtime.count();
 }

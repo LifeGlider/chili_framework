@@ -8,14 +8,14 @@ class Target
 {
 public:
 	void Init(float xPosInput, float yPosInput, float xVectorInput, float yVectorInput, float speedInput, int sizeInput, int colorRedInput, int colorGreenInput, int colorBlueInput);
-	void UpdatePosition();
+	void UpdatePosition(float deltaTime);
 	void UpdateHitbox();
 	bool IsOnScreen(const Graphics& gfx, const float x_pos, const float y_pos) const;
 	void Draw(Graphics& gfx) const;
 	bool isAliveCheck() const;
 	bool isColliding(const int objectHitbox[4]);
 	void KillTarget();
-	void UpdateTargetStatus(const int objectHitbox[4], bool trigger);
+	void UpdateTargetStatus(const int objectHitbox[4], bool trigger, float deltaTime);
 	
 private:
 	float xPos;
